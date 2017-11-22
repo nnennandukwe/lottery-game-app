@@ -6,7 +6,7 @@ Welcome to the lottery app game.
 
 Firstly, download or clone the repository from your terminal to your desired local machine location
 
-On a MAC OSX Terminal, paste this into the terminal
+On a MAC OSX Terminal, paste this into the terminal OR simply download the folder and skip the `git clone` step.
 
 `git clone https://github.com/nnennandukwe/lottery-game-app`
 

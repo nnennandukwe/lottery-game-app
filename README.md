@@ -10,7 +10,7 @@ On a MAC OSX Terminal, paste this into the terminal OR simply download the folde
 
 `git clone https://github.com/nnennandukwe/lottery-game-app`
 
-Enter into the cloned file.
+Enter into the directory via your Terminal.
 
 Run the Node file 'app.js' with
 

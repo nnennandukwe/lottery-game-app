@@ -23,29 +23,26 @@ app.use(express.static('public'))
 //API
 app.get('/', (req,res)=>{
 
-  db.collection('lottery-wins ').find().toArray((err,result) =>{
+  db.collection('lottery-wins').find().toArray((err,result) =>{
     if (err) return console.log(err)
     res.render('index.ejs', {students: result}) //pending
   })
 })
 
-app.post('/', (req, res)=>{
+app.post('/winnings', (req, res)=>{
 
-  let date = Math.floor(Date.now()/1000)
-
-  console.log(date)
-  db.collection('lottery-wins').save({name:req.body.name, lastname:req.body.lastname, date: date, att: ""}, (err,result)=>{
+  db.collection('lottery-wins').save({wins:req.body.wins, losses:req.body.losses, percentageWon:""}, (err,result)=>{
     if (err) return console.log(err)
     console.log('Saved to database')
     res.redirect('/')
   })
 })
 
-app.put('/',(req,res)=>{
-  db.collection('lottery-wins')
-  .findOneAndUpdate({name: req.body.name, lastname:req.body.lastname},{
+app.put('/gameStats',(req,res)=>{
+  db.collection('students')
+  .findOneAndUpdate({wins: req.body.wins, losses:req.body.losses},{
     $set:{
-      att:req.body.att
+      percentageWon:wins/100
     }
   }, {
     sort: {_id:-1},
@@ -57,8 +54,8 @@ app.put('/',(req,res)=>{
 })
 
 app.delete('/delete',(req,res)=>{
-  db.collection('lottery-wins').findOneAndDelete({name:req.body.name,msg: req.body.msg}, (err,result)=>{
+  db.collection('lottery-wins').findOneAndDelete({wins:req.body.wins,losses: req.body.losses}, (err,result)=>{
     if(err) return res.send(500,err)
-    res.send('Student deleted')
+    res.send('Stats deleted')
   })
 })
